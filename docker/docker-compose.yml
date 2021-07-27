@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+      args:
+        - NGINX_IMAGE_VERSION=${NGINX_IMAGE_VERSION}
+    container_name: "laravel6-php8-nginx"
+    environment:
+      TZ: ${TIME_ZONE}
+    ports:
+      - "${NGINX_HTTP_PORT}:80"
+    volumes:
+      - ${NGINX_DEFAULT_CONF_PATH}:/etc/nginx/conf.d/default.conf
+      - ${NGINX_LOG_PATH}:/var/log/nginx
+      - ${NGINX_LOGROTATE_PATH}:/etc/logrotate.d/nginx
+      - ${PROJECT_PATH}:/var/www/html
+  php:
+    build:
+      context: ./php
+      args:
+        - PHP_IMAGE_VERSION=${PHP_IMAGE_VERSION}
+        - XDEBUG_VERSION=${XDEBUG_VERSION}
+        - NODE_VERSION=${NODE_VERSION}
+        - LARAVEL_VERSION=${LARAVEL_VERSION}
+    container_name: "laravel6-php8-php"
+    environment:
+      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
+      TZ: ${TIME_ZONE}
+      LARAVEL_VERSION: ${LARAVEL_VERSION}
+    volumes:
+      - ${PHP_INI_PATH}:/usr/local/etc/php/php.ini
+      - ${XDEBUG_INI_PATH}:/usr/local/etc/php/conf.d/zz-xdebug.ini
+      - ${PROJECT_PATH}:${PHP_PROJECT_ROOT}
