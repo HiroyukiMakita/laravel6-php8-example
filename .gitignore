@@ -1,5 +1,8 @@
-# Log files
+# Log
 *log
 
-# env files
+# env
 *.env
+
+# Dependencies
+/vendor
