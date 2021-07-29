@@ -18,6 +18,7 @@ CONTAINER =
 ARG =
 
 # docker services (container name)
+NGINX := nginx
 PHP := php
 
 #########################################################
@@ -44,6 +45,10 @@ up:
 exec-php:
 	$(eval CONTAINER := $(PHP))
 	$(eval ARG := -c "cd $(PHP_PROJECT_ROOT) && bash")
+	@$(EXEC)
+
+exec-nginx:
+	$(eval CONTAINER := $(NGINX))
 	@$(EXEC)
 
 down:

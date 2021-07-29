@@ -1,5 +1,14 @@
-# Log files
+# Log
 *log
 
-# env files
+# env
 *.env
+
+# Dependencies
+/vendor
+/node_modules
+
+# Laravel Mix deliverables
+/public/css
+/public/js
+/public/mix-manifest.json

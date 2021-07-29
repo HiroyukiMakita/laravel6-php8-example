@@ -9,6 +9,7 @@ ENV LANGUAGE en_US:
 
 ARG XDEBUG_VERSION
 ARG NODE_VERSION
+ARG NPM_VERSION
 
 # apt-getでインストールするのはOS用のパッケージ
 # peclでインストールするのはPHP用のパッケージ
@@ -21,7 +22,7 @@ RUN apt-get update \
   # Dockerコンテナ内でIlluminate\Http\UploadedFileクラスを利用するには PHP GD が必要
   libpng-dev libjpeg-dev libicu-dev \
   nodejs \
-  && npm install -g npm \
+  && npm install -g npm@${NPM_VERSION} \
   && pecl install xdebug${XDEBUG_VERSION} apcu \
   && echo "extension=apcu.so" > /usr/local/etc/php/conf.d/apcu.ini \
   && docker-php-ext-enable xdebug \
