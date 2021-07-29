@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+require('dotenv').config({path: 'docker/.env'});
 
 /*
  |--------------------------------------------------------------------------
@@ -12,4 +13,18 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css')
+    // ソースマップ作成
+    .sourceMaps()
+    // バージョニングを有効化
+    .version()
+    // 変更検知でブラウザをホットリロード
+    .browserSync(
+        {
+            proxy: `127.0.0.1:${process.env.NGINX_HTTP_PORT}`,
+            files: [
+                './resources/**/*',
+                './public/**/*'
+            ]
+        }
+    );
