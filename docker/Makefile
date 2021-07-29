@@ -39,6 +39,15 @@ laravel-exec-php:
 	")
 	@$(EXEC)
 
+install-admin-lte:
+	$(eval CONTAINER := $(PHP))
+	$(eval ARG := -c "\
+	cd $(PHP_PROJECT_ROOT) && \
+	composer require jeroennoten/laravel-adminlte && \
+	php artisan adminlte:install\
+	")
+	@$(EXEC)
+
 up:
 	@$(UP)
 
