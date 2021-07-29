@@ -23,6 +23,7 @@ services:
         - PHP_IMAGE_VERSION=${PHP_IMAGE_VERSION}
         - XDEBUG_VERSION=${XDEBUG_VERSION}
         - NODE_VERSION=${NODE_VERSION}
+        - NPM_VERSION=${NPM_VERSION}
         - LARAVEL_VERSION=${LARAVEL_VERSION}
     container_name: "laravel6-php8-php"
     environment:
